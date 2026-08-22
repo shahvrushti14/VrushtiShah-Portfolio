@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Mail, ArrowUpRight, Send, Check } from "lucide-react"
 
 const socials = [
-  { label: "Instagram", href: "https://www.instagram.com/vrushtis14/" },
+  { label: "Instagram", href: "https://www.instagram.com/vsdigital.in/" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/shah-vrushti-396169357/" },
 ]
 
@@ -15,9 +15,7 @@ const servicesList = [
 ]
 
 export function Contact() {
-  const [selectedServices, setSelectedServices] = useState<string[]>([
-    "Social Media Marketing (SMM)",
-  ])
+  const [selectedServices, setSelectedServices] = useState<string[]>(servicesList)
   const [name, setName] = useState("")
   const [message, setMessage] = useState("")
 
