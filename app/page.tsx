@@ -7,10 +7,12 @@ import { Work } from "@/components/work"
 import { Stats } from "@/components/stats"
 import { Faq } from "@/components/faq"
 import { Contact } from "@/components/contact"
+import { DayNightBackground } from "@/components/day-night-background"
 
 export default function Page() {
   return (
     <>
+      <DayNightBackground />
       <SiteHeader />
       <main>
         <Hero />

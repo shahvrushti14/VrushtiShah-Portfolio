@@ -32,8 +32,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
-  themeColor: '#f7f6f3',
+  colorScheme: 'dark',
+  themeColor: '#090d16',
 }
 
 export default function RootLayout({
@@ -44,9 +44,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable} bg-background`}
+      className={`dark ${spaceGrotesk.variable} ${inter.variable} bg-transparent text-white`}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans text-white antialiased bg-transparent selection:bg-emerald-500 selection:text-slate-950">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
