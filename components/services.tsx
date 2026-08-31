@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { Share2, Search, MonitorSmartphone, CheckCircle2, ArrowRight } from "lucide-react"
 
 const services = [
@@ -15,10 +15,8 @@ const services = [
       "Instagram, LinkedIn & Meta Ads",
       "Community engagement & growth",
     ],
-    gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
-    glow: "rgba(16, 185, 129, 0.35)",
-    borderGlow: "group-hover:border-emerald-400",
-    badgeBg: "bg-emerald-500/25 text-emerald-300",
+    glow: "rgba(139, 243, 230, 0.3)",
+    badgeBg: "bg-[#8bf3e6]/15 text-[#8bf3e6] border-[#8bf3e6]/30",
   },
   {
     icon: Search,
@@ -30,148 +28,107 @@ const services = [
       "On-page & technical SEO fixes",
       "High-converting search content",
     ],
-    gradient: "from-purple-500/20 via-violet-500/10 to-transparent",
-    glow: "rgba(168, 85, 247, 0.35)",
-    borderGlow: "group-hover:border-purple-400",
-    badgeBg: "bg-purple-500/25 text-purple-300",
+    glow: "rgba(70, 183, 255, 0.3)",
+    badgeBg: "bg-[#46b7ff]/15 text-[#46b7ff] border-[#46b7ff]/30",
   },
   {
     icon: MonitorSmartphone,
     title: "Web Design & UI/UX",
-    tag: "Modern & Fast Sites",
+    tag: "Modern & 3D Web",
     desc: "Fast, modern, conversion-focused websites. UI designs built to turn casual visitors into paying leads across all devices.",
     points: [
       "Landing pages & full site builds",
       "Responsive 60fps UI/UX",
       "SEO-optimized & lightning fast",
     ],
-    gradient: "from-blue-500/20 via-indigo-500/10 to-transparent",
-    glow: "rgba(59, 130, 246, 0.35)",
-    borderGlow: "group-hover:border-blue-400",
-    badgeBg: "bg-blue-500/25 text-blue-300",
+    glow: "rgba(124, 147, 255, 0.3)",
+    badgeBg: "bg-[#7c93ff]/15 text-[#7c93ff] border-[#7c93ff]/30",
   },
 ]
 
-function Service3DCard({ service, index }: { service: (typeof services)[0]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const Icon = service.icon
-
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 200, damping: 25 })
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 200, damping: 25 })
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const normX = (e.clientX - rect.left) / rect.width - 0.5
-    const normY = (e.clientY - rect.top) / rect.height - 0.5
-    mouseX.set(normX)
-    mouseY.set(normY)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative [perspective:1000px]"
-    >
-      <motion.article
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        className={`relative flex h-full flex-col rounded-3xl border border-slate-700/90 bg-slate-950/85 p-7 shadow-2xl backdrop-blur-xl transition-all duration-300 ${service.borderGlow}`}
-      >
-        {/* Glow backdrop behind card */}
-        <div
-          className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          style={{
-            background: `radial-gradient(circle at 50% 0%, ${service.glow}, transparent 75%)`,
-          }}
-        />
-
-        {/* Top Header inside card */}
-        <div style={{ transform: "translateZ(30px)" }} className="flex items-center justify-between">
-          <div
-            className={`flex h-14 w-14 items-center justify-center rounded-2xl ${service.badgeBg} border border-white/20 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}
-          >
-            <Icon className="h-7 w-7" strokeWidth={2.2} />
-          </div>
-          <span className="rounded-full border border-slate-700 bg-slate-900/90 px-3.5 py-1 text-[11px] font-extrabold tracking-wider uppercase text-white shadow-sm">
-            {service.tag}
-          </span>
-        </div>
-
-        {/* Title & Description with 3D Depth */}
-        <div style={{ transform: "translateZ(40px)" }} className="mt-6 flex-1">
-          <h3 className="font-display text-2xl font-extrabold tracking-tight text-white drop-shadow-sm">
-            {service.title}
-          </h3>
-          <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-200">
-            {service.desc}
-          </p>
-
-          <ul className="mt-6 flex flex-col gap-2.5 border-t border-slate-800/90 pt-6">
-            {service.points.map((p) => (
-              <li key={p} className="flex items-start gap-2.5 text-xs font-bold text-slate-100">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                <span>{p}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Action Button */}
-        <div style={{ transform: "translateZ(35px)" }} className="mt-8 pt-2">
-          <a
-            href="#contact"
-            className="group/btn flex items-center justify-between rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-xs font-extrabold text-white shadow-md transition-all duration-300 hover:bg-emerald-400 hover:text-slate-950"
-          >
-            <span>Discuss {service.title}</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          </a>
-        </div>
-      </motion.article>
-    </motion.div>
-  )
-}
-
 export function Services() {
   return (
-    <section id="services" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <section id="services" className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
-              What I do
-            </div>
-            <h2 className="mt-3 max-w-2xl font-display text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] md:text-6xl">
+            <p className="font-mono text-[11px] uppercase tracking-wider text-[#8bf3e6]">
+              Core Capabilities
+            </p>
+            <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-[#f4f5f6] sm:text-5xl">
               Services built for measurable growth
             </h2>
           </div>
-          <p className="max-w-sm text-sm font-bold leading-relaxed text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            Three core digital capabilities working together to maximize reach, search authority, and sales conversions.
+          <p className="max-w-sm text-sm text-[#94a3b8]">
+            Three core digital disciplines working together to maximize reach, search authority, and sales conversions.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
-          {services.map((s, i) => (
-            <Service3DCard key={s.title} service={s} index={i} />
-          ))}
+        <div className="grid gap-6 md:grid-cols-3">
+          {services.map((s, i) => {
+            const cardRef = useRef<HTMLDivElement>(null)
+            const Icon = s.icon
+
+            const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+              if (!cardRef.current) return
+              const rect = cardRef.current.getBoundingClientRect()
+              const x = e.clientX - rect.left
+              const y = e.clientY - rect.top
+              cardRef.current.style.setProperty("--mouse-x", `${x}px`)
+              cardRef.current.style.setProperty("--mouse-y", `${y}px`)
+            }
+
+            return (
+              <motion.article
+                key={s.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#0e1117] p-7 shadow-2xl transition-all duration-500 hover:-translate-y-1.5 hover:border-white/30 hover:shadow-[0_18px_60px_-18px_rgba(70,183,255,0.3)]"
+              >
+                {/* Mouse Spotlight Glow */}
+                <div className="card-glow" />
+
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-[#46b7ff] shadow-md transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-6 w-6" strokeWidth={2} />
+                    </div>
+                    <span className={`rounded-full border px-3 py-1 text-[11px] font-mono uppercase ${s.badgeBg}`}>
+                      {s.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-6 font-display text-2xl font-bold tracking-tight text-[#f4f5f6]">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#94a3b8]">
+                    {s.desc}
+                  </p>
+
+                  <ul className="mt-6 flex flex-col gap-2.5 border-t border-white/10 pt-6">
+                    {s.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-xs font-semibold text-[#f4f5f6]">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#8bf3e6]" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <a
+                  href="#contact"
+                  className="mt-8 flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold text-[#f4f5f6] transition-all hover:bg-[#f4f5f6] hover:text-[#07080a]"
+                >
+                  <span>Discuss {s.title}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </motion.article>
+            )
+          })}
         </div>
       </div>
     </section>

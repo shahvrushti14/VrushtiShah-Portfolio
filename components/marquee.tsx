@@ -1,25 +1,27 @@
 const items = [
   "Social Media Marketing",
-  "SEO & Search Optimization",
+  "SEO & Google Page 1",
   "Web Design & UI/UX",
-  "Meta & Instagram Ads",
+  "Meta & IG Ads",
   "Brand Growth Strategy",
   "Analytics & Conversions",
   "Landing Pages",
+  "Tailwind CSS",
+  "React & Next.js",
+  "Framer Motion",
+  "Three.js 3D",
 ]
 
 export function Marquee() {
   return (
-    <section aria-label="Specialties" className="border-y border-white/20 bg-slate-900/60 py-4 text-white backdrop-blur-md">
-      <div className="relative flex overflow-hidden">
-        <div className="flex shrink-0 animate-marquee items-center whitespace-nowrap">
-          {[...items, ...items, ...items].map((item, i) => (
-            <span key={i} className="mx-6 flex items-center gap-6 font-display text-xs font-bold uppercase tracking-widest text-slate-200">
-              {item}
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" aria-hidden />
-            </span>
-          ))}
-        </div>
+    <section aria-label="Specialties" className="relative overflow-hidden border-y border-white/10 bg-[#07080a] py-5">
+      <div className="flex w-max animate-marquee gap-12 whitespace-nowrap" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
+        {[...items, ...items, ...items].map((item, i) => (
+          <span key={i} className="font-mono text-xs uppercase tracking-widest text-[#64748b] flex items-center">
+            {item}
+            <span className="ml-12 text-[#46b7ff]">✦</span>
+          </span>
+        ))}
       </div>
     </section>
   )
