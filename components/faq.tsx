@@ -31,17 +31,17 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
-      <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+    <section id="faq" className="relative overflow-hidden px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#8bf3e6]">
+          <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
             <HelpCircle className="h-4 w-4" />
             <span>FAQ</span>
           </div>
-          <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-[#f4f5f6] sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] md:text-5xl">
             Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-[#94a3b8]">
+          <p className="mt-4 text-sm font-semibold leading-relaxed text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
             Have questions about how we can collaborate to grow your brand? Here are direct answers to common inquiries.
           </p>
         </div>
@@ -52,24 +52,24 @@ export function Faq() {
             return (
               <div
                 key={f.q}
-                className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+                className={`overflow-hidden rounded-2xl border backdrop-blur-xl transition-all duration-300 ${
                   isOpen
-                    ? "border-[#46b7ff] bg-[#0e1117] shadow-xl"
-                    : "border-white/10 bg-[#0e1117]/70 hover:border-white/30"
+                    ? "border-emerald-400 bg-slate-950/90 shadow-2xl"
+                    : "border-slate-700/90 bg-slate-950/85 hover:border-slate-500"
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 p-5 text-left font-display text-base font-bold text-[#f4f5f6] md:p-6"
+                  className="flex w-full items-center justify-between gap-4 p-5 text-left font-display text-base font-extrabold text-white md:p-6"
                 >
-                  <span>{f.q}</span>
+                  <span className="text-white drop-shadow-sm">{f.q}</span>
                   <div
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform duration-300 ${
                       isOpen
-                        ? "rotate-45 bg-[#46b7ff] text-[#07080a]"
-                        : "bg-white/10 text-[#94a3b8]"
+                        ? "rotate-45 bg-emerald-400 text-slate-950 font-bold"
+                        : "bg-slate-800 text-slate-200"
                     }`}
                   >
                     <Plus className="h-4 w-4" />
@@ -84,8 +84,8 @@ export function Faq() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="border-t border-white/10 p-5 pt-0 md:p-6 md:pt-0">
-                        <p className="mt-3 text-xs leading-relaxed text-[#94a3b8]">
+                      <div className="border-t border-slate-800/90 p-5 pt-0 md:p-6 md:pt-0">
+                        <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-200">
                           {f.a}
                         </p>
                       </div>

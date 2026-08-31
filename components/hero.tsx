@@ -1,96 +1,82 @@
 "use client"
 
 import { Interactive3DSkills } from "@/components/interactive-3d-skills"
+import { Sparkles, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-12 pb-16 sm:pt-20 lg:pt-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section id="top" className="relative overflow-hidden px-5 pt-12 pb-16 md:px-8 md:pt-20 lg:pt-24">
+      <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center">
-          {/* Left Column: ScrollTide Headline & CTAs */}
-          <div className="flex flex-col items-start">
-            {/* Top Pill Badge */}
-            <motion.a
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              href="#work"
-              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-[#94a3b8] backdrop-blur transition hover:border-white/20 hover:text-[#f4f5f6]"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#8bf3e6] animate-pulse" />
-              <span className="font-mono uppercase tracking-wider text-[11px]">✦ Digital Growth & 3D Web Studio</span>
-              <span className="text-[#64748b] transition group-hover:translate-x-0.5 group-hover:text-[#f4f5f6]">→</span>
-            </motion.a>
+          {/* Left Column: Headlines & CTA */}
+          <div className="flex flex-col">
+            <div className="flex flex-wrap items-center justify-between gap-4 sm:justify-start">
+              <div className="flex flex-wrap items-center gap-3 text-xs font-extrabold uppercase tracking-[0.2em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <span className="flex items-center gap-2 rounded-full border border-white/40 bg-slate-900/80 px-3.5 py-1.5 backdrop-blur-md shadow-lg">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                  </span>
+                  <span className="text-emerald-300">Available for projects</span>
+                </span>
+                <span aria-hidden className="text-white/60">/</span>
+                <span className="text-white">Ahmedabad, Gujarat</span>
+              </div>
 
-            {/* ScrollTide Display Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-6 font-display text-[clamp(2.5rem,7vw,5.2rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-[#f4f5f6]"
-            >
-              Ship brands that
+              {/* 3D Pop-Pop Monogram Badge */}
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }}
+                whileTap={{ scale: 0.95 }}
+                animate={{ y: [0, -3, 0] }}
+                transition={{
+                  y: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
+                  scale: { type: "spring", stiffness: 400, damping: 15 },
+                }}
+                className="hidden sm:flex items-center gap-2 rounded-full border border-white/40 bg-white px-3.5 py-1.5 shadow-xl shadow-slate-950/20 cursor-pointer"
+              >
+                <div className="flex items-center justify-center rounded-full bg-white p-0.5">
+                  <img src="/logo-vs-icon.png" alt="VS Monogram" className="h-5 w-auto object-contain" />
+                </div>
+                <span className="text-[11px] font-extrabold tracking-wider text-slate-950 uppercase">Official Brand</span>
+              </motion.div>
+            </div>
+
+            <h1 className="mt-6 font-display text-[14vw] font-extrabold leading-[0.86] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] sm:text-[11vw] lg:text-[7.2rem]">
+              Digital
               <br />
-              move like the <span className="text-tide">tide.</span>
-            </motion.h1>
+              <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent drop-shadow-md">
+                Marketing
+              </span>
+            </h1>
 
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 max-w-xl text-balance text-base leading-relaxed text-[#94a3b8] sm:text-lg"
-            >
-              I&apos;m Vrushti Shah — a digital marketer helping brands scale with data-driven{" "}
-              <span className="font-semibold text-[#f4f5f6]">Social Media Marketing</span>,{" "}
-              <span className="font-semibold text-[#f4f5f6]">Page 1 SEO</span>, and{" "}
-              <span className="font-semibold text-tide">3D Web Design</span> that converts.
-            </motion.p>
+            <p className="mt-8 max-w-xl text-lg font-bold leading-relaxed text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] text-pretty">
+              I&apos;m Vrushti Shah — a digital marketer helping brands grow with
+              data-driven <span className="font-extrabold text-emerald-300 underline underline-offset-4 decoration-emerald-400">social media marketing</span>,{" "}
+              <span className="font-extrabold text-emerald-300 underline underline-offset-4 decoration-emerald-400">SEO</span> that ranks, and{" "}
+              <span className="font-extrabold text-emerald-300 underline underline-offset-4 decoration-emerald-400">web design</span> that converts.
+            </p>
 
-            {/* CTA Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-8 flex flex-wrap items-center gap-3"
-            >
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[#f4f5f6] px-6.5 py-3.5 text-sm font-semibold text-[#07080a] transition hover:bg-white"
+                className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 px-7 py-3.5 text-sm font-extrabold text-slate-950 shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-emerald-400/40"
               >
-                <span className="relative">Start a Project</span>
-                <span className="relative transition group-hover:translate-x-0.5">→</span>
+                <Sparkles className="h-4 w-4" />
+                <span>Start a project</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#work"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-medium text-[#f4f5f6] transition hover:bg-white/5 hover:border-white/40"
+                className="rounded-full border border-white/40 bg-slate-900/80 px-6 py-3.5 text-sm font-extrabold text-white backdrop-blur-md shadow-lg transition-all duration-300 hover:border-white hover:bg-slate-800"
               >
-                Browse Selected Work
+                View selected work
               </a>
-            </motion.div>
-
-            {/* ScrollTide Social Proof Counter */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-9 flex items-center gap-3 text-sm text-[#94a3b8]"
-            >
-              <div className="flex -space-x-2">
-                <span className="h-7 w-7 rounded-full border-2 border-[#07080a]" style={{ background: "radial-gradient(circle at 30% 30%, #2e7dff, #0b0d10)" }} />
-                <span className="h-7 w-7 rounded-full border-2 border-[#07080a]" style={{ background: "radial-gradient(circle at 30% 30%, #8bf3e6, #0b0d10)" }} />
-                <span className="h-7 w-7 rounded-full border-2 border-[#07080a]" style={{ background: "radial-gradient(circle at 30% 30%, #46b7ff, #0b0d10)" }} />
-                <span className="h-7 w-7 rounded-full border-2 border-[#07080a]" style={{ background: "radial-gradient(circle at 30% 30%, #7c93ff, #0b0d10)" }} />
-              </div>
-              <span>
-                <span className="font-bold text-[#f4f5f6]">40+ Brands Transformed</span> · 3.5x Avg. Lift
-              </span>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Right Column: Interactive 3D Photo & Skill Orbits */}
-          <div className="mt-8 flex justify-center lg:mt-0 lg:justify-end">
+          {/* Right Column: 3D Interactive Photo & Skills Showcase */}
+          <div className="mt-6 flex justify-center lg:mt-0 lg:justify-end">
             <Interactive3DSkills />
           </div>
         </div>
