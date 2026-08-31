@@ -1,10 +1,14 @@
 "use client"
 
+import { useState } from "react"
 import { Interactive3DSkills } from "@/components/interactive-3d-skills"
-import { Sparkles, ArrowRight } from "lucide-react"
+import { Walking3DSkills } from "@/components/walking-3d-skills"
+import { Sparkles, ArrowRight, Footprints, Layers } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function Hero() {
+  const [viewMode, setViewMode] = useState<"walk" | "orbit">("walk")
+
   return (
     <section id="top" className="relative overflow-hidden px-5 pt-12 pb-16 md:px-8 md:pt-20 lg:pt-24">
       <div className="mx-auto max-w-7xl">
@@ -73,11 +77,42 @@ export function Hero() {
                 View selected work
               </a>
             </div>
+
+            {/* 3D Mode Selector Buttons */}
+            <div className="mt-8 flex items-center gap-2">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-slate-300 drop-shadow-sm">
+                3D View:
+              </span>
+              <button
+                type="button"
+                onClick={() => setViewMode("walk")}
+                className={`inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-1.5 text-xs font-extrabold transition-all duration-300 ${
+                  viewMode === "walk"
+                    ? "border-emerald-400 bg-emerald-500/25 text-emerald-300 shadow-md scale-105"
+                    : "border-slate-800 bg-slate-900/70 text-slate-300 hover:border-slate-700 hover:text-white"
+                }`}
+              >
+                <Footprints className="h-3.5 w-3.5" />
+                <span>3D Walk & Sequential Skills</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode("orbit")}
+                className={`inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-1.5 text-xs font-extrabold transition-all duration-300 ${
+                  viewMode === "orbit"
+                    ? "border-purple-400 bg-purple-500/25 text-purple-300 shadow-md scale-105"
+                    : "border-slate-800 bg-slate-900/70 text-slate-300 hover:border-slate-700 hover:text-white"
+                }`}
+              >
+                <Layers className="h-3.5 w-3.5" />
+                <span>3D Orbit Card</span>
+              </button>
+            </div>
           </div>
 
           {/* Right Column: 3D Interactive Photo & Skills Showcase */}
           <div className="mt-6 flex justify-center lg:mt-0 lg:justify-end">
-            <Interactive3DSkills />
+            {viewMode === "walk" ? <Walking3DSkills /> : <Interactive3DSkills />}
           </div>
         </div>
       </div>
